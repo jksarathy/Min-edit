@@ -1,0 +1,47 @@
+Jayshree Sarathy
+jayshree.sarathy@yale.edu
+
+Questions:
+
+Q1. 
+drive vs. brief: 4
+animal vs. mammal: 4
+elementary vs. education: 15
+python vs. perl: 8
+
+Q2. 
+Accuracy using Levenshtein distance: 0.665158371041
+
+Q3.
+If a much larger lexicon were used, I think the accuracy would be significantly lower because
+the algorithm would find more words as it goes through the dictionary that happen to have a closer
+distance to the original word, but that are not necessarily related to the original word in any way.
+
+Q4.
+a.
+The best accuracy I was able to get was 0.733031674208 / 0.737556561086 / 0.735294117647 / 0.737556561086.
+b.
+I made changes to the substitution, insertion, and deletion cost functions in which I made
+the cost of changing the first letter much more expensive (5). I decided to do this because when comparing
+my program's output with the correction file, I noticed that the correction file placed more importance
+on retaining the first letter of the misspelled word, even if another word in the dictionary was
+closer using the Levenshtein distance measurement.
+
+I made changes to the substitution function that took into account which letters were being substituted. I did this by finding
+the difference between the ASCII codes of the two letters being substituted, weighting them from 0-3 and returning that in my substitution function. However, this actually decreased the accuracy of my program significantly so I commented it out.
+
+Another change was adding the function transposeCost which was considered if two letters were swapped in the 
+target and source word. I noticed this often happens between e and i, or other common examples (for example: teh for the). This increased the accuracy of my program slightly (.733 to .735).
+
+Next, I added a function prefixCost that subtracts from the final minEditDistance if the prefix of the source word is “un” and the prefix of the target word is “dis”, such as uncomfort to discomfort. This increased the accuracy slightly from .735 to .737.
+
+I also added the difference between lengths of target and source word to the minEditDistance function, because
+I noticed that the corrections file tends to place more weight on retaining the original length of the word 
+(this often keeps the word in the right tense). However, I was surprised to see that this made absolutely
+no difference in the accuracy of my program.
+
+c.
+Increasing the cost of changing the first letter improved the accuracy of my program significantly
+(from .665 to .733). I think this helped so much because in general, when people misspell a word, they
+tend not to choose the wrong first letter. The first letter is an important clue to the person's target word, 
+so by placing more weight on that in the algorithm, I was able to increase the accuracy a lot.
